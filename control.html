@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>Control Page</title>
+    <style type="text/css">
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #999;
+        }
+
+        .ui-loader {
+          display: none !important;
+        }
+
+        .ui-icon-loading {
+            background: none !important;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="./lib/jquerymobile-swipeupdown.js"></script>
+    <script src="./lib/socket.io.js"></script>
+</head>
+<body>
+<script>
+    var COMMAND = {
+        UP: 0,
+        DOWN: 1,
+        LEFT: 2,
+        RIGHT: 3
+    };
+
+    var socket = io('http://' + location.hostname + ':3030');
+
+    // control orientation reverse
+    function onSwipeUp(event) {
+        socket.emit('command', {action: COMMAND.DOWN});
+    }
+
+    function onSwipeDown(event) {
+        socket.emit('command', {action: COMMAND.UP});
+    }
+
+    function onSwipeLeft(event) {
+        socket.emit('command', {action: COMMAND.RIGHT});
+    }
+
+    function onSwipeRight(event) {
+        socket.emit('command', {action: COMMAND.LEFT});
+    }
+
+    function onTap(event) {
+        socket.emit('command', {action: COMMAND.DOWN});
+    }
+
+    socket.on('connected', function () {
+        $(window).on('swipeup', onSwipeUp);
+        $(window).on('swipedown', onSwipeDown);
+        $(window).on('swipeleft', onSwipeLeft);
+        $(window).on('swiperight', onSwipeRight);
+        $(document.body).on('tap', onTap);
+    });
+</script>
+</body>
+</html>

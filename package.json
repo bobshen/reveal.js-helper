@@ -1,0 +1,22 @@
+{
+  "name": "reveal.js-helper",
+  "version": "1.0.0",
+  "description": "Helper tool for controlling web page by remote device",
+  "main": "lib/server.js",
+  "scripts": {
+    "start": "node lib/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bobshen/reveal.js-helper.git"
+  },
+  "author": "shenbin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bobshen/reveal.js-helper/issues"
+  },
+  "homepage": "https://github.com/bobshen/reveal.js-helper#readme",
+  "dependencies": {
+    "socket.io": "^1.4.8"
+  }
+}
